@@ -1,0 +1,270 @@
+html, 
+body {
+    height: 100%;
+	width:100%;
+}
+
+.bt-menu{
+	width:70%; 
+	margin-left:15%; 
+	background-color: #555; 
+	padding-top: 2px; 
+	padding-bottom:2px; 
+	text-align:center; 
+	margin-top:10px; 
+	border-radius: 10px;
+}
+
+.bt-menu:hover{
+	cursor: pointer;
+	background-color: #666; 
+}
+
+.inp-menu{
+	border:none;
+	background:none;
+	background-color:#444;
+	border-radius: 5px;
+	text-align:center;
+	color:#fff;
+	margin-bottom: 10px;
+	width: 100%;
+}
+
+
+.inp-menu, .inp-head:focus{
+	outline: none;
+}
+
+#div-currentcolor{
+	height:20px;
+	width: 20px;
+	border: 1px solid #eee;
+	margin-left: calc(50% - 10px);
+	
+}
+
+#canvas{
+	display:none;
+	position: relative;
+	left: calc(50% - 200px); 
+	top: calc(50% - 200px); 
+	border:1px solid #000; 
+	background-image:url('transp.png'); 
+	background-size: 10px;
+}
+
+#pallet-canvas{
+	display:none;
+	position: fixed; 
+	bottom:30px; 
+	left:10px; 
+	border: 2px solid #666; 
+	background-image:url('transp.png');
+}
+
+#div-currentcolor{
+	background-image:url('transp.png');
+}
+
+#div-currentcolor:hover{
+	cursor:hand;
+}
+
+#layer-currentcolor{
+	
+	background-size:100%;
+	width:100%;
+	height:100%;
+}
+
+#head-menu{
+	width:100%; 
+	background-color: #222; 
+	padding-top: 2px; 
+	padding-bottom:2px;
+	text-align:center
+
+}
+
+#head-menu:hover{
+	cursor: move;
+}
+
+
+.bt-menu-head{
+	padding-left: 5px; 
+	padding-right: 5px; 
+	border-right: 1px solid #aaa;
+} 
+
+.bt-menu-head:hover{
+	cursor: pointer;
+}
+
+#menu-suspended{
+	display:none;
+	position: absolute; 
+	top: 60px; 
+	left: 10px; 
+	border: 2px solid #666; 
+	background-color: rgb(20,20,20); 
+	width: 100px; 
+	height: 180px;
+	z-index:999;
+
+}
+
+#option-project{
+	position: absolute; 
+	top: calc(50% - 150px); 
+	left: calc(50% - 150px); 
+	border: 2px solid #666; 
+	background-color: rgb(20,20,20); 
+	width: 300px; 
+	height: 200px;
+	z-index:998;
+	display: none;
+	
+}
+
+#option-project .inp-menu{
+	border:none;
+	background:none;
+	background-color:#444;
+	border-radius: 5px;
+	text-align:center;
+	color:#fff;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	width: 70%;
+}
+
+
+#option-project .inp-menu, .inp-head:focus{
+	outline: none;
+}
+
+#out-geratecode{
+	display: none; 
+	position: fixed;  
+	top: 25%; 
+	background-color:#222; 
+	width: 50%; 
+	height:50%; 
+	margin-left: 25%; 
+	border:solid 1px #222; 
+	margin-bottom:20px; 
+	
+} 
+
+#out-code{
+	
+	overflow:scroll;
+	height:calc(100% - 20px); 
+}
+
+#bt-createproject{
+	width:50%;
+	height: 20px;	
+	padding-top:10px;
+	padding-bottom: 10px;
+	margin-left: 25%;  
+	text-align: center;
+	background-color:#333;
+	border-radius: 5px;
+}
+
+#bt-createproject:hover{
+	cursor: pointer;
+	background-color:#525252;
+}
+
+.bt-exit{
+	text-align:center; 
+	float:left; 
+	display:block; 
+	width:20px; 
+	height: 20px; 
+	background-color: #fa0000;
+}
+
+.bt-exit:hover{
+	cursor: pointer;
+}
+
+.head-modal{
+	width:100%; height: 30px; background-color: #000;
+}
+
+.head-modal .title{
+	float:left; width:calc(100% - 20px); text-align: center
+}
+
+#open-project{
+	display: none; 
+	position: fixed;  
+	top: 25%; 
+	background-color:#222; 
+	width: 50%; 
+	height:50%; 
+	margin-left: 25%; 
+	border:solid 1px #222; 
+	margin-bottom:20px; 
+	
+	
+}
+
+#list-project{
+	overflow-y: scroll;	
+	height: calc(100% -  30px); 
+}
+
+.item-listproject{
+	width:calc(100% - 20px);
+	height: 20px;
+	background-color: #111;
+	margin-left: 5px;
+	margin-top: 10px;
+	padding: 5px;
+}
+
+.item-listproject:hover{
+	cursor:pointer;
+	background-color: #333;
+}
+.item-listproject .title-project{
+	width:calc(100% - 40px);
+	display:block;
+	float:left;
+}
+.item-listproject .bt-delete{
+	width: 20px;
+	display:block;
+	float:left;
+}
+.item-listproject .bt-delete:hover{
+	text-decoration: underline;
+}
+
+
+
+::-webkit-scrollbar {
+      width: 15px;
+} /* this targets the default scrollbar (compulsory) */
+
+::-webkit-scrollbar-track {
+      background-color:  rgb(100, 100, 100);
+} /* the new scrollbar will have a flat appearance with the set background color */
+ 
+::-webkit-scrollbar-thumb {
+      background-color: rgba(255,255,255, 0.5); 
+} /* this will style the thumb, ignoring the track */
+ 
+::-webkit-scrollbar-button {
+      background-color: rgb(10, 10, 10);
+} /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+ 
+::-webkit-scrollbar-corner {
+      background-color: black;
+} /* if both the vertical and the horizontal bars appear, then perhaps the right bottom corner also needs to be styled */
