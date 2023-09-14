@@ -326,7 +326,7 @@ function gerateCode () {
 	outtext = "[ <br>";
 	codecolor = 0;
     for(var i=0; i<arr_rgb.length; i++){
-		//outtext +="(";
+		outtext +="[";
 		for(var j=0; j<arr_rgb[i].length; j++){
 			//if this pallet is empy, add color
 			if(newpallet.length ==0){
@@ -360,7 +360,8 @@ function gerateCode () {
 			
 			
 		}
-		outtext +="<br>";
+		outtext = outtext.slice(0,-2);
+		outtext +="]<br>";
 	}
 	outtext += "]";
 
@@ -368,6 +369,7 @@ function gerateCode () {
 	for(var l=0; l<newpallet.length; l++){
 		outtext += "("+newpallet[l]+"),";
 	}
+	outtext = outtext.slice(0,-1);
 	outtext += "]";
 	
 	return outtext;
