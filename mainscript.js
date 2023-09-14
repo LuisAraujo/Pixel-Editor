@@ -237,9 +237,13 @@ function listProject(){
 	document.getElementById("list-project").innerHTML = "";
 	var project = getListProject();
 	for (var i =0; i< project.length; i++){	
-		var info = getProject(project[i]).split("_");
-		document.getElementById("list-project").innerHTML += "<div idproject='"+project[i]+"' class='item-listproject'><span class='title-project'>"+info[0]+"</span> <span class='bt-delete'>delete</span></div>";
-	}
+		var elem = getProject(project[i]);
+		if(elem!=null){
+			var info = elem.split("_");
+			document.getElementById("list-project").innerHTML += "<div idproject='"+project[i]+"' class='item-listproject'><span class='title-project'>"+info[0]+"</span> <span class='bt-delete'>delete</span></div>";
+	
+		}
+		}
 	
 	setFunctionsList();
 	
@@ -252,7 +256,9 @@ function setFunctionsList(){
 	for (var i = 0; i < classname.length; i++) {
 		
 		classname[i].addEventListener('click', function(evt){
+			
 			idCurrentProject = this.getAttribute("idproject");
+			console.log(idCurrentProject);
 			nameproject = this.innerHTML;
 			document.getElementById("open-project").style = "display: none";
 			var proj = getProject(idCurrentProject);
