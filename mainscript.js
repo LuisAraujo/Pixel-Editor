@@ -14,6 +14,7 @@ arr_rgb = null;
 
 colors = [];
 colorspallet = [];
+colorscustompallet = [];
 colorcopied = [0,0,0];
 
 start();
@@ -52,6 +53,18 @@ function createPallet(){
    blue2 = [125,0,250,1];
    colors = [white, red, green, blue, cyan, yellow, magenta, orange, purple, blue2];
 	
+   col1 = [200,80, 80,1];
+   col2 = [230,88,88,1];
+   col3 = [166,149,149,1];
+   col4 = [137, 130,130,1];
+   col5 = [195,180,180,1];
+   col6 = [242,188,123,1];
+   col7 = [209,157,94,1];
+   col8 = [96,69,46,1];
+   col9 = [0,0,0,1]; 
+   col10 = [131,98,17,1];
+
+   colorscustompallet = [col1, col2, col3, col4, col5, col6,col7,col8,col9,col10];
    drawPallet();
 
 }	
@@ -59,32 +72,54 @@ function createPallet(){
 
 function drawPallet(){
 
-    pallet.height = size_pallet* colors.length
+    pallet.height = size_pallet* colors.length + size_pallet;
 	pallet.width = size_pallet * 10;
-	for(var i=0; i< colors.length; i++){
+	for(var i=0; i< colors.length+1; i++){
 		
         var nred = 0;
 		var ngreen = 0;
 		var nblue = 0;
-		var alfa = colors[i][3];
-		colorspallet.push([]);
-		for(var j=0; j< 10; j++){
+		if(i<colors.length){
+
+			var alfa = colors[i][3];
+			colorspallet.push([]);
+
 			
-			p_contexto.fillStyle = "rgba("+nred+","+ngreen+","+nblue+","+alfa+")";
-			p_contexto.fillRect( j*size_pallet , i*size_pallet ,size_pallet , size_pallet );
+			for(var j=0; j< 10; j++){
+				
+				p_contexto.fillStyle = "rgba("+nred+","+ngreen+","+nblue+","+alfa+")";
+				p_contexto.fillRect( j*size_pallet , i*size_pallet ,size_pallet , size_pallet );
+				
+				colorspallet[i].push( [nred, ngreen, nblue, alfa] );
+				
+				if(nred < colors[i][0])
+				nred+=25;
+				if(ngreen < colors[i][1])
+				ngreen+=25;
+				if(nblue < colors[i][2])
+				nblue+=25;
+				if(alfa < 1)
+				alfa = 1;
 			
-			colorspallet[i].push( [nred, ngreen, nblue, alfa] );
-			
-			if(nred < colors[i][0])
-			   nred+=25;
-			if(ngreen < colors[i][1])
-			   ngreen+=25;
-			if(nblue < colors[i][2])
-			   nblue+=25;
-			if(alfa < 1)
-			   alfa = 1;
+			}
 		
+		}else{
+			colorspallet.push([]);
+			for(var j=0; j< 10; j++){
+				nred =colorscustompallet[j][0];
+				ngreen = colorscustompallet[j][1];
+				nblue = colorscustompallet[j][2];
+				alfa = 1;
+
+				p_contexto.fillStyle = "rgba("+nred+","+ngreen+","+nblue+","+alfa+")";
+				p_contexto.fillRect( j*size_pallet , i*size_pallet ,size_pallet , size_pallet );
+
+				colorspallet[i].push( colorscustompallet[j] );
+			}
 		}
+		
+
+
 	}
 
 }
