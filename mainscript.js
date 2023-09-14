@@ -324,21 +324,24 @@ function showCode(evt){
 function gerateCode () {
 	newpallet = [];
 	outtext = "[ <br>";
-	
+	codecolor = 0;
     for(var i=0; i<arr_rgb.length; i++){
 		//outtext +="(";
 		for(var j=0; j<arr_rgb[i].length; j++){
 			//if this pallet is empy, add color
-			if(newpallet.length ==0)
+			if(newpallet.length ==0){
 				   //is need add position of color in master pallet, not arr_rgb[i,j]	<- but it work too
 				   //is need set in outtext the positon 0 (for ref the color in local pallet)
 				   newpallet.push( arr_rgb[i][j] );
-			else{
+				   codecolor = 0;
+			}else{
 				//else verify if color are in pallet
 				var inpallet = false;
 				for(var l=0; l< newpallet.length; l++){
-					if(newpallet[l] == arr_rgb[i][j]){
+					console.log(newpallet[l] , arr_rgb[i][j], newpallet[l] == arr_rgb[i][j])
+					if(newpallet[l].toString() == arr_rgb[i][j].toString()){
 					   inpallet = true;
+					   codecolor = l;
 					    //is need set in outtext the positon l (for ref the color in local pallet)
 					   break;
 					 }
@@ -347,25 +350,26 @@ function gerateCode () {
 				if(!inpallet){
 					 //is need set in outtext the positon newpallet.length-1 (for ref the color in local pallet)
 					newpallet.push( arr_rgb[i][j] );
+					codecolor = newpallet.length-1;
 				}
 			
 			}
 			   
-			outtext += "("+arr_rgb[i][j]+"), ";
+			//outtext += "("+arr_rgb[i][j]+"), ";
+			outtext += ""+codecolor+", ";
 			
 			
 		}
 		outtext +="<br>";
 	}
 	outtext += "]";
-	
-	//add outtext the pallet
-	//outtext += "[";
-	//for(var l=0; l< newpallet.length; l++){
-	//outtext +=newpallet[l]+","
-	//}
-	//outtext += "]";
 
+	outtext += "<br>palet = [";
+	for(var l=0; l<newpallet.length; l++){
+		outtext += "("+newpallet[l]+"),";
+	}
+	outtext += "]";
+	
 	return outtext;
 };
 
