@@ -124,11 +124,47 @@ function drawPallet(){
 
 }
 
- 
+function translatePixels(disx, disy){
+	arr_rgbaux = [];
+	for(i=0; i< widthsize; i++){
+		arr_rgbaux[disx+i] = [];
+		for(j=0; j< heightsize; j++){
+			console.log(i, j);
+			if(((disx+i)>=0) && ((disy+i) >=0 ) && (i <= widthsize) && (i<= heightsize) )
+			{
+				console.log('entrou')
+				arr_rgbaux[disx+i][disy+j] = arr_rgb[i][j];	
+			}
+		}
+	}
+
+	if(disx > 0){
+		for(j=0; j< disx; j++)
+			arr_rgbaux[j] = [];
+	}else if(disx<0){
+
+		for(j=arr_rgb[0].length-1; j < arr_rgb[0].length-disx; j++){
+			
+			arr_rgbaux[j] = [];
+		}
+	}
+
+	if(disy > 0){
+		for(i=0; i< heightsize; i++)
+			for(j=0; j< disy; j++)
+				arr_rgbaux[i][j] = [];
+	}else if(disy<0){
+
+	}
+	arr_rgb = arr_rgbaux;
+}
+
+
 function drawPixel(){
 	contexto.clearRect(0, 0, canvas.width, canvas.height);
 	for(i=0; i< arr_rgb.length; i++){
-		for(j=0; j< arr_rgb[i].length; j++){	 
+		for(j=0; j< arr_rgb[i].length; j++){	
+			
 			contexto.fillStyle = "rgba("+arr_rgb[i][j][0]+","+arr_rgb[i][j][1]+","+arr_rgb[i][j][2]+","+arr_rgb[i][j][3]+ ")"; 
 			contexto.fillRect( j*size_current, i*size_current,size_current, size_current);
 		
@@ -170,7 +206,6 @@ canvas.addEventListener('click', function(evt) {
     
 	arr_rgb[posy][posx] = colorcopied;
 	drawPixel();
-	console.log(posx, posy);
 	
 
 }, false);
@@ -194,7 +229,6 @@ pallet.addEventListener('click', function(evt) {
 	var posy = parseInt(mousePos.y/size_pallet );
     
 	colorcopied = colorspallet[posy][posx];
-	console.log("background-color: rgba("+colorcopied+")");
 	document.getElementById("layer-currentcolor").style = "background-color: rgba("+colorcopied+")";
 	document.getElementById("pallet-canvas").style = "display: none";
 
@@ -208,28 +242,18 @@ inpheightsize.addEventListener("change", changesize);
 
 function changesize(evt) {
 	
+	widthsize = parseInt(document.getElementById("widthcanvas").value);
+	heightsize = parseInt(document.getElementById("heightcanvas").value);
+
 	 canvas.height = parseInt(document.getElementById("heightcanvas").value) * size_current;
 	 canvas.width = parseInt(document.getElementById("widthcanvas").value) * size_current;
 	 
 	 heigth = (document.height !== undefined) ? document.height : document.body.offsetHeight;
 	
-	/*
-	 if(canvas.height <  heigth){
-		console.log("ok");
-		size_current = size;
-	 
-	 }else if(size_current != size/2){
-		size_current = size/2;
-		canvas.height = parseInt(document.getElementById("heightcanvas").value) * size_current ;
-		canvas.width = parseInt(document.getElementById("widthcanvas").value) * size_current ;
-		console.log("overflow");
-	 }
-	 */
 	 canvas.style.left = "calc(50% - "+canvas.width/2+"px)";
 	 canvas.style.top = "calc(50% - "+canvas.height/2+"px)";
 	
 	if( (canvas.height/size_current) < arr_rgb.length){
-		console.log((canvas.height/size_current) , arr_rgb.length, arr_rgb.length - (canvas.height/size_current));
 		
 		while(arr_rgb.length >  (canvas.height/size_current)){
 		   arr_rgb.pop();
@@ -271,15 +295,16 @@ document.getElementById("bt-openproject").addEventListener("click", function(){
 function listProject(){
 	document.getElementById("list-project").innerHTML = "";
 	var project = getListProject();
+	var list = "";
 	for (var i =0; i< project.length; i++){	
 		var elem = getProject(project[i]);
 		if(elem!=null){
 			var info = elem.split("_");
-			document.getElementById("list-project").innerHTML += "<div idproject='"+project[i]+"' class='item-listproject'><span class='title-project'>"+info[0]+"</span> <span class='bt-delete'>delete</span></div>";
-	
+			list += "<div idproject='"+project[i]+"' class='item-listproject'><span class='title-project'>"+info[0]+"</span></div>";
 		}
-		}
-	
+	}
+
+	document.getElementById("list-project").innerHTML = list;
 	setFunctionsList();
 	
 }
@@ -293,7 +318,6 @@ function setFunctionsList(){
 		classname[i].addEventListener('click', function(evt){
 			
 			idCurrentProject = this.getAttribute("idproject");
-			console.log(idCurrentProject);
 			nameproject = this.innerHTML;
 			document.getElementById("open-project").style = "display: none";
 			var proj = getProject(idCurrentProject);
@@ -314,7 +338,6 @@ function setFunctionsList(){
 					arr_rgb.push([]);
 					for(var j=0; j< strarray2.length; j++){
 						var values = strarray2[j].split(",");
-						console.log(strarray2[j]);
 						arr_rgb[i].push([ parseInt(values[0]),parseInt(values[1]),parseInt(values[2]), parseInt(values[3]) ]);
 					}
 				}
@@ -373,7 +396,7 @@ function gerateCode () {
 				//else verify if color are in pallet
 				var inpallet = false;
 				for(var l=0; l< newpallet.length; l++){
-					console.log(newpallet[l] , arr_rgb[i][j], newpallet[l] == arr_rgb[i][j])
+				
 					if(newpallet[l].toString() == arr_rgb[i][j].toString()){
 					   inpallet = true;
 					   codecolor = l;
@@ -457,7 +480,7 @@ document.getElementById("bt-clearall").addEventListener("click", function(evt){
 
 /*EXPORT FILE*/
 document.getElementById("bt-exportfile").addEventListener("click",function (evt){
-	console.log("o");
+
 	var text = gerateCode().replace(/<br>+/g, '');
 	var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
 	saveAs(blob, nameproject+".txt");
@@ -481,8 +504,7 @@ document.getElementById("bt-saveproject").addEventListener("click", function(){
 		}
 		
 		saveProject(idCurrentProject, nameproject+"_"+document.getElementById("widthcanvas").value+"_"+document.getElementById("heightcanvas").value+"_"+strarray);
-		
-		console.log(strarray );
+	
 	}
 });
 
