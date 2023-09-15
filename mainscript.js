@@ -126,11 +126,11 @@ function drawPallet(){
 
 function translatePixels(disx, disy){
 	arr_rgbaux = [];
-	for(i=0; i< widthsize; i++){
+	for(i=0; i< heightsize; i++){
 		arr_rgbaux[disx+i] = [];
-		for(j=0; j< heightsize; j++){
+		for(j=0; j< widthsize; j++){
 			console.log(i, j);
-			if(((disx+i)>=0) && ((disy+i) >=0 ) && (i <= widthsize) && (i<= heightsize) )
+			if(((disx+i)>=0) && ((disy+j) >=0 ) && (i < widthsize) && (i< heightsize) )
 			{
 				console.log('entrou')
 				arr_rgbaux[disx+i][disy+j] = arr_rgb[i][j];	
@@ -140,11 +140,10 @@ function translatePixels(disx, disy){
 
 	if(disx > 0){
 		for(j=0; j< disx; j++)
-			arr_rgbaux[j] = [];
+		 	arr_rgbaux[j] = [];
 	}else if(disx<0){
 
 		for(j=arr_rgb[0].length-1; j < arr_rgb[0].length-disx; j++){
-			
 			arr_rgbaux[j] = [];
 		}
 	}
@@ -152,10 +151,14 @@ function translatePixels(disx, disy){
 	if(disy > 0){
 		for(i=0; i< heightsize; i++)
 			for(j=0; j< disy; j++)
-				arr_rgbaux[i][j] = [];
+		 		arr_rgbaux[i][j] = [0,0,0,0];
+			
 	}else if(disy<0){
-
+		for(i=0; i< heightsize; i++)
+			for(j=widthsize+disy; j< widthsize; j++)
+		 		arr_rgbaux[i][j] = [0,0,0,0];
 	}
+	console.log(arr_rgb);
 	arr_rgb = arr_rgbaux;
 }
 
