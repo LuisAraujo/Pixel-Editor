@@ -238,6 +238,8 @@ inpwidthsize = document.getElementById("widthcanvas");
 inpheightsize = document.getElementById("heightcanvas");
 inpwidthsize.addEventListener("change", changesize);
 inpheightsize.addEventListener("change", changesize);
+widthsize = parseInt(document.getElementById("widthcanvas").value);
+heightsize = parseInt(document.getElementById("heightcanvas").value);
 
 
 function changesize(evt) {
@@ -330,6 +332,9 @@ function setFunctionsList(){
 				document.getElementById("menu-suspended").style.display = "block";
 				document.getElementById("widthcanvas").value = info[1];
 				document.getElementById("heightcanvas").value =info[2];
+				widthsize = info[1];
+				heightsize = info[2];
+
 				arr_rgb = [];
 				
 				var strarray = info[3].split("@");
