@@ -162,7 +162,21 @@ function translatePixels(disx, disy){
 	arr_rgb = arr_rgbaux;
 }
 
+function showArr_RGB(){
+	var str = "[";
+	for( let i = 0; i < arr_rgb.length; i++ ){
+		str+= "[";
+		for( let j = 0; j < arr_rgb[i].length; j++ ){
+			str += "[" + arr_rgb[i][0] +","+ arr_rgb[i][1] +","+ arr_rgb[i][2]+","+ arr_rgb[i][3] +"],";
+		}
+		str = str.slice(0, -1);
+		str += "],\n";
+	}
 
+	str = str.slice(0, -2);
+	str += "]";
+	return str;
+}
 function drawPixel(){
 	contexto.clearRect(0, 0, canvas.width, canvas.height);
 	for(i=0; i< arr_rgb.length; i++){
