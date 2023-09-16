@@ -441,13 +441,15 @@ function gerateCode () {
 			
 		}
 		outtext = outtext.slice(0,-2);
-		outtext +="]<br>";
+		outtext +="],<br>";
+	
 	}
-	outtext += "]";
+	outtext = outtext.slice(0, -5);
+	outtext += "<br>]";
 
 	outtext += "<br>palet = [";
 	for(var l=0; l<newpallet.length; l++){
-		outtext += "("+newpallet[l]+"),";
+		outtext += "["+newpallet[l]+"],";
 	}
 	outtext = outtext.slice(0,-1);
 	outtext += "]";
